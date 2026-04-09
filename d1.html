@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SpiceSpot Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f5f5f5;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #e23744;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar h2 { margin: 0; }
+
+.navbar a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* SECTIONS */
+.section {
+    display: none;
+    padding: 20px;
+}
+
+.active {
+    display: block;
+}
+
+/* HERO */
+.hero {
+    background: url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092");
+    background-size: cover;
+    color: rgb(185, 2, 2);
+    padding: 80px;
+    text-align: center;
+}
+
+/* CARDS */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* GRID */
+.grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* CHARTS */
+.charts-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.chart-box {
+    flex: 1 1 300px;
+    height: 250px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* BUTTON */
+.btn {
+    background: #e23744;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* FEEDBACK */
+.feedback {
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>SpiceSpot 🍽️</h2>
+    <div>
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('orders')">Orders</a>
+        <a onclick="showSection('analytics')">Analytics</a>
+        <a onclick="showSection('settings')">Settings</a>
+    </div>
+</div>
+
+<!-- HOME -->
+<div id="home" class="section active">
+    <div class="hero">
+        <h1>Welcome to SpiceSpot</h1>
+        <p>Delicious food, delivered fast 🚀</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">Total Orders: 120</div>
+        <div class="card">Revenue: ₹25,000</div>
+        <div class="card">Top Dish: Biryani</div>
+    </div>
+
+    <h3>Customer Feedback</h3>
+    <div class="feedback">⭐️⭐️⭐️⭐️⭐️ Amazing taste!</div>
+    <div class="feedback">⭐️⭐️⭐️ Good service</div>
+</div>
+
+<!-- ORDERS -->
+<div id="orders" class="section">
+    <h2>Orders</h2>
+
+    <div class="card">Order #101 - Delivered</div>
+    <div class="card">Order #102 - Preparing</div>
+    <div class="card">Order #103 - Cancelled</div>
+</div>
+
+<!-- ANALYTICS -->
+<div id="analytics" class="section">
+    <h2>Analytics</h2>
+
+    <div class="charts-row">
+        <div class="chart-box">
+            <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <canvas id="pieChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings" class="section">
+    <h2>Settings</h2>
+
+    <div class="card">
+        <h3>Contact Info</h3>
+        <p>Email: spicespot@gmail.com</p>
+        <p>Phone: 9876543210</p>
+    </div>
+
+    <div class="card">
+        <h3>Preferences</h3>
+        <button class="btn">Update Settings</button>
+    </div>
+</div>
+
+<script>
+function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+/* BAR CHART */
+new Chart(document.getElementById("barChart"), {
+    type: 'bar',
+    data: {
+        labels: ["Mon","Tue","Wed","Thu","Fri"],
+        datasets: [{
+            label: "Orders",
+            data: [20, 30, 25, 40, 50],
+            backgroundColor: ["red","blue","green","orange","purple"]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+/* PIE CHART */
+new Chart(document.getElementById("pieChart"), {
+    type: 'pie',
+    data: {
+        labels: ["Biryani","Pizza","Burger"],
+        datasets: [{
+            data: [50, 30, 20]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+/* LINE CHART */
+new Chart(document.getElementById("lineChart"), {
+    type: 'line',
+    data: {
+        labels: ["1PM","2PM","3PM","4PM"],
+        datasets: [{
+            label: "Orders Trend",
+            data: [10, 20, 15, 30],
+            borderColor: "blue",
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+</script>
+
+</body>
+</html>
