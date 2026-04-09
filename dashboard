@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spice Task5 Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .metrics {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 200px;
+      text-align: center;
+    }
+    .chart, .table {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .bar {
+      height: 20px;
+      background: #6c5ce7;
+      margin: 5px 0;
+      border-radius: 4px;
+    }
+    .line {
+      height: 200px;
+      background: linear-gradient(to right, #a29bfe, #6c5ce7);
+      border-radius: 8px;
+    }
+    .pie {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #0984e3 0% 33%, 
+        #6c5ce7 33% 66%, 
+        #00cec9 66% 100%
+      );
+      margin: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background: #6c5ce7;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Spice Task5 Dashboard</h1>
+
+  <!-- Metrics -->
+  <div class="metrics">
+    <div class="card"><h3>Revenue</h3><p>83.9K</p></div>
+    <div class="card"><h3>Customer Rating</h3><p>3.002</p></div>
+    <div class="card"><h3>Cancellation Rate</h3><p>16%</p></div>
+    <div class="card"><h3>Delivery Time</h3><p>12.32 mins</p></div>
+  </div>
+
+  <!-- Bar Chart -->
+  <div class="chart">
+    <h3>Revenue by Menu Item</h3>
+    <div class="bar" style="width:90%">Ice Cream</div>
+    <div class="bar" style="width:70%">Grilled Fish</div>
+    <div class="bar" style="width:65%">Dal Makhani</div>
+    <div class="bar" style="width:60%">Fresh Juice</div>
+    <div class="bar" style="width:55%">Cold Coffee</div>
+    <div class="bar" style="width:40%">Paneer Butter Masala</div>
+  </div>
+
+  <!-- Line Chart -->
+  <div class="chart">
+    <h3>Revenue by Order Date</h3>
+    <div class="line"></div>
+  </div>
+
+  <!-- Pie Chart -->
+  <div class="chart">
+    <h3>Quantity Ordered by Order Type</h3>
+    <div class="pie"></div>
+    <p style="text-align:center">Delivery: 194 | Dine-In: 184 | Takeaway: 200</p>
+  </div>
+
+  <!-- Table -->
+  <div class="table">
+    <h3>Waiter Name and Customer Rating</h3>
+    <table>
+      <tr><th>Waiter Name</th><th>Customer Rating (1-5)</th></tr>
+      <tr><td>Waiter_B</td><td>3.383</td></tr>
+      <tr><td>Waiter_A</td><td>3.055</td></tr>
+      <tr><td>Waiter_D</td><td>2.983</td></tr>
+      <tr><td>Waiter_C</td><td>2.92</td></tr>
+      <tr><td>Summary</td><td>3.086</td></tr>
+    </table>
+  </div>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
