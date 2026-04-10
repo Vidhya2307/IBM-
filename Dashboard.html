@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SpicePot Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    display: flex;
+    background: #f4f6f9;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background: #111;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+}
+
+.sidebar h2 { text-align: center; }
+
+.sidebar ul { list-style: none; padding: 0; }
+
+.sidebar ul li {
+    padding: 12px;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover {
+    background: #333;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.section { display: none; }
+.active { display: block; }
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* CHART */
+.chart-box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>SpicePot</h2>
+    <ul>
+        <li onclick="show('dashboard')">Dashboard</li>
+        <li onclick="show('orders')">Orders</li>
+        <li onclick="show('analytics')">Analytics</li>
+        <li onclick="show('settings')">Settings</li>
+        <li onclick="show('contact')">Contact</li>
+    </ul>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="section active">
+    <h2>Dashboard</h2>
+
+    <div class="cards">
+        <div class="card"><h1>83.9K</h1><p>Revenue</p></div>
+        <div class="card"><h1>3.0</h1><p>Rating</p></div>
+        <div class="card"><h1>16%</h1><p>Cancellation</p></div>
+        <div class="card"><h1>12.3</h1><p>Delivery Time</p></div>
+    </div>
+
+    <div class="chart-box">
+        <canvas id="barChart"></canvas>
+    </div>
+</div>
+
+<!-- ORDERS -->
+<div id="orders" class="section">
+    <h2>Orders</h2>
+
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>City</th>
+            <th>Item</th>
+            <th>Status</th>
+        </tr>
+
+        <tr><td>101</td><td>Chennai</td><td>Biryani</td><td>Delivered</td></tr>
+        <tr><td>102</td><td>Bangalore</td><td>Pizza</td><td>Cancelled</td></tr>
+        <tr><td>103</td><td>Hyderabad</td><td>Burger</td><td>Delivered</td></tr>
+    </table>
+</div>
+
+<!-- ANALYTICS -->
+<div id="analytics" class="section">
+    <h2>Analytics</h2>
+
+    <p><b>Peak Hour:</b> 8 PM</p>
+    <p><b>Busiest Day:</b> Friday</p>
+    <p><b>Top Category:</b> Biryani</p>
+
+    <div class="chart-box">
+        <canvas id="lineChart"></canvas>
+    </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings" class="section">
+    <h2>Settings</h2>
+
+    <label>Outlet Name:</label><br>
+    <input type="text" value="SpicePot Chennai"><br><br>
+
+    <label>Manager Name:</label><br>
+    <input type="text" value="Vidhya"><br><br>
+
+    <button onclick="save()">Save Settings</button>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+    <h2>Contact</h2>
+
+    <p>Email: support@spicepot.com</p>
+    <p>Phone: +91 9876543210</p>
+    <p>Location: Chennai, India</p>
+</div>
+
+</div>
+
+<script>
+
+/* NAVIGATION */
+function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+/* SAVE SETTINGS */
+function save() {
+    alert("Settings Saved Successfully ✅");
+}
+
+/* CHARTS */
+new Chart(document.getElementById("barChart"), {
+    type: 'bar',
+    data: {
+        labels: ["Biryani","Pizza","Burger"],
+        datasets: [{
+            label: "Orders",
+            data: [30,20,25]
+        }]
+    }
+});
+
+new Chart(document.getElementById("lineChart"), {
+    type: 'line',
+    data: {
+        labels: ["Mon","Tue","Wed","Thu","Fri"],
+        datasets: [{
+            label: "Orders",
+            data: [10,20,15,30,40]
+        }]
+    }
+});
+
+</script>
+
+</body>
+</html>
