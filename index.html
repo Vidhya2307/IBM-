@@ -24,18 +24,18 @@ body {
 .login-box {
     background: white;
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 12px;
     width: 300px;
     text-align: center;
 }
 
-input {
-    width: 90%;
+.login-box input {
+    width: 100%;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
 }
 
-.btn {
+.login-btn {
     background: #d32f2f;
     color: white;
     padding: 10px;
@@ -55,21 +55,27 @@ input {
 
 .navbar a {
     color: white;
-    margin-left: 20px;
+    margin-left: 15px;
     cursor: pointer;
 }
 
-/* SECTION */
-.section { display: none; padding: 20px; }
-.active { display: block; }
+/* SECTIONS */
+.section {
+    display: none;
+    padding: 20px;
+}
+
+.active {
+    display: block;
+}
 
 /* HERO */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(211,47,47,0.5)),
-    url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092");
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(211,47,47,0.6)),
+                url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092");
     background-size: cover;
     color: white;
-    padding: 60px;
+    padding: 80px;
     text-align: center;
 }
 
@@ -77,8 +83,9 @@ input {
 .card {
     background: white;
     padding: 20px;
+    border-radius: 12px;
     margin: 10px;
-    border-radius: 10px;
+    border-left: 5px solid #d32f2f;
 }
 
 /* GRID */
@@ -107,18 +114,35 @@ canvas {
     width: 100% !important;
     height: 100% !important;
 }
+
+/* FEEDBACK */
+.feedback {
+    background: white;
+    padding: 10px;
+    margin: 10px;
+    border-left: 4px solid red;
+}
+
+/* BUTTON */
+.btn {
+    background: #d32f2f;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- LOGIN PAGE -->
 <div id="loginPage" class="login-container">
     <div class="login-box">
         <h2>SpiceSpot Login</h2>
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
-        <button class="btn" onclick="login()">Login</button>
+        <button class="login-btn" onclick="login()">Login</button>
         <p id="error" style="color:red;"></p>
     </div>
 </div>
@@ -141,7 +165,6 @@ canvas {
     <div id="home" class="section active">
         <div class="hero">
             <h1>Welcome to SpiceSpot</h1>
-            <p>Food Analytics Dashboard</p>
         </div>
 
         <div class="grid">
@@ -151,8 +174,8 @@ canvas {
         </div>
 
         <h3>Customer Feedback</h3>
-        <div class="card">⭐️⭐️⭐️⭐️ Great taste!</div>
-        <div class="card">⭐️⭐️⭐️ Good service</div>
+        <div class="feedback">⭐️ Excellent food!</div>
+        <div class="feedback">⭐️⭐️ Good service</div>
     </div>
 
     <!-- ORDERS -->
@@ -194,8 +217,7 @@ canvas {
 </div>
 
 <script>
-
-/* LOGIN FUNCTION */
+/* LOGIN */
 function login() {
     let user = document.getElementById("username").value;
     let pass = document.getElementById("password").value;
@@ -204,14 +226,13 @@ function login() {
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("dashboard").style.display = "block";
     } else {
-        document.getElementById("error").innerText = "Invalid login!";
+        document.getElementById("error").innerText = "Invalid Login!";
     }
 }
 
 /* LOGOUT */
 function logout() {
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("loginPage").style.display = "flex";
+    location.reload();
 }
 
 /* NAVIGATION */
@@ -231,7 +252,7 @@ new Chart(document.getElementById("barChart"), {
             backgroundColor: ["#ff4d4d","#d32f2f","#ff6666","#ff1a1a","#cc0000"]
         }]
     },
-    options: { responsive: true, maintainAspectRatio: false }
+    options: { responsive:true, maintainAspectRatio:false }
 });
 
 new Chart(document.getElementById("pieChart"), {
@@ -240,10 +261,10 @@ new Chart(document.getElementById("pieChart"), {
         labels: ["Biryani","Pizza","Burger"],
         datasets: [{
             data: [50,30,20],
-            backgroundColor: ["#ff4d4d","#d32f2f","#ff6666"]
+            backgroundColor: ["#ff4d4d","#d32f2f","#ff9999"]
         }]
     },
-    options: { responsive: true, maintainAspectRatio: false }
+    options: { responsive:true, maintainAspectRatio:false }
 });
 
 new Chart(document.getElementById("lineChart"), {
@@ -257,10 +278,9 @@ new Chart(document.getElementById("lineChart"), {
             fill: false
         }]
     },
-    options: { responsive: true, maintainAspectRatio: false }
+    options: { responsive:true, maintainAspectRatio:false }
 });
-
 </script>
 
 </body>
-  </html>
+</html>
